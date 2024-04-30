@@ -1,0 +1,25 @@
+name: PR Title Linter
+on:
+  pull_request:
+    types: [opened, reopened, edited, synchronize]
+    branches:
+      - main
+
+jobs:
+  check_title_of_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.pull_request.title }}
+          regex: '[a-zA-Z]+\d:\s\w+\s\w+'
+
+      - uses: actions-ecosystem/action-create-comment@v1
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        with:
+          github_token: ${{ secrets.github_token }}
+          body: |
+            Hello, @${{ github.actor }}!
+  
+            Please, current PR name is ${{ steps.regex-match.outputs.match == '' }}, but should be: 'Homework<number>: Name Surname'
