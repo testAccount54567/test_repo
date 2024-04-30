@@ -1,1 +1,2 @@
-# test_repo
+# pymar2024
+Python test automation course
