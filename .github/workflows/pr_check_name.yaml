@@ -19,4 +19,4 @@ jobs:
           on-failed-regex-create-review: true
           on-failed-regex-request-changes: true
           on-failed-regex-comment:
-            "Please, FIX PR name, but should be ``Homework<number><:> <Name Surname>``"
+            "Please, FIX PR name, it should be ``Homework<number><:> <Name Surname>``"
