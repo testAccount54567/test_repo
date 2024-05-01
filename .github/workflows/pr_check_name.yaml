@@ -15,11 +15,13 @@ jobs:
           text: ${{ github.event.pull_request.title }}
           regex: '[a-zA-Z]+\d:\s\w+\s\w+'
 
-      - uses: actions-ecosystem/action-create-comment@v1
+      - uses: actions/github-script@v7
         if: ${{ steps.regex-match.outputs.match == '' }}
         with:
-          github_token: ${{ secrets.github_token }}
-          body: |
-            Hello, @${{ github.actor }}!
-  
-            Please, current PR name is ${{ steps.regex-match.outputs.match == '' }}, but should be: 'Homework<number>: Name Surname'
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Please, current PR name is ${{ steps.regex-match.outputs.match == '' }}, but should be: 'Homework<number>: Name Surname'
+            })
