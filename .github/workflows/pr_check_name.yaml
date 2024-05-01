@@ -1,9 +1,10 @@
 name: PR Title Linter
+
 on:
+  workflow_dispatch:
   pull_request:
     types: [opened, reopened, edited, synchronize]
-    branches:
-      - main
+    branches: [main] 
 
 jobs:
   pr_lint:
