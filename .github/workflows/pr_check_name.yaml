@@ -6,19 +6,15 @@ on:
       - main
 
 jobs:
-  check_title_of_pr:
+  pr_lint:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
-      - uses: actions-ecosystem/action-regex-match@v2
-        id: regex-match
+      - uses: morrisoncole/pr-lint-action@v1.7.1
         with:
-          text: ${{ github.event.pull_request.title }}
-          regex: '[a-zA-Z]+\d:\s\w+\s\w+'
-
-      - uses: mshick/add-pr-comment@v2
-        if: ${{ steps.regex-match.outputs.match == '' }}
-        with:
-          message: |
-            Please, current PR name is ${{ steps.regex-match.outputs.match == '' }}, but should be: Homework<number>: Name Surname
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          title-regex: "[a-zA-Z]+[0-9]: [a-zA-Z]+ [a-zA-Z]+"
+          on-failed-regex-fail-action: false
+          on-failed-regex-create-review: true
+          on-failed-regex-request-changes: true
+          on-failed-regex-comment:
+            "Please, FIX PR name, but should be ``Homework<number><:> <Name Surname>``"
