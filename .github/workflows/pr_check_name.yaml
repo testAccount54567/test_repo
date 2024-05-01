@@ -8,6 +8,8 @@ on:
 jobs:
   pr_lint:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: morrisoncole/pr-lint-action@v1.7.1
         with:
