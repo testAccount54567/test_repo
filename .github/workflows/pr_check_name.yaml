@@ -15,7 +15,7 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title-regex: "[a-zA-Z]+[0-9]: [a-zA-Z]+ [a-zA-Z]+"
-          on-failed-regex-fail-action: false
+          on-failed-regex-fail-action: true
           on-failed-regex-create-review: true
           on-failed-regex-request-changes: true
           on-failed-regex-comment:
