@@ -19,6 +19,6 @@ jobs:
           on-failed-regex-create-review: true
           on-failed-regex-request-changes: true
           on-failed-regex-comment:
-            "Please, FIX Pull Request title, it should be ``Homework<number><:> <Name Surname>``"
+            "Please, FIX Pull Request title, it should be ``Homework<number><:> <Your Name> <Your Surname>``"
           on-succeeded-regex-dismiss-review-comment:
             "Pull Request title looks good!"
